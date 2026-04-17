@@ -1,33 +1,50 @@
 import { useEffect, useState } from "react";
+import aboutImage from "./assets/aboutme.png";
 
 const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
 const skills = [
-  { name: "HTML", level: 90 },
-  { name: "CSS", level: 80 },
-  { name: "JavaScript", level: 75 },
-  { name: "React", level: 70 },
-  { name: "Tailwind CSS", level: 65 },
-  { name: "Git & GitHub", level: 60 },
+  { name: "HTML", level: 95 },
+  { name: "CSS", level: 90 },
+  { name: "JavaScript", level: 85 },
+  { name: "React", level: 75 },
+  { name: "Tailwind CSS", level: 85 },
+  { name: "Bootstrap", level: 80 },
+  { name: "PHP", level: 80 },
+  { name: "MySQL", level: 85 },
+  { name: "Java", level: 70 },
+  { name: "Git & GitHub", level: 75 },
 ];
 
 const projects = [
   {
-    title: "Todo App",
-    desc: "A simple task manager built with React and localStorage. Users can add, complete, and delete tasks.",
-    tech: ["React", "CSS"],
+    title: "FireQuakeEscape",
+    desc: "Web system and admin panel for a 3D evacuation simulation game with account management and performance tracking. Automated calculations for 200+ students' progress.",
+    tech: ["React", "JavaScript", "MySQL"],
     link: "#",
   },
   {
-    title: "Weather App",
-    desc: "Fetches real-time weather data using OpenWeatherMap API. Shows temperature, humidity, and conditions.",
-    tech: ["JavaScript", "API", "HTML"],
+    title: "E-commerce Website",
+    desc: "Developed responsive front-end pages using OpenCart (Twig), HTML, CSS, and Bootstrap. Improved UI consistency while collaborating with backend developers via GitHub.",
+    tech: ["HTML", "CSS", "Twig", "Bootstrap"],
     link: "#",
   },
   {
-    title: "Portfolio Website",
-    desc: "This website! Built with React and Tailwind CSS as my Grade 12 capstone project.",
-    tech: ["React", "Tailwind"],
+    title: "Payroll System",
+    desc: "User interface for employee and admin payroll features including salary computation, payslips, and records management with automated calculations.",
+    tech: ["Java", "MySQL", "HTML", "CSS"],
+    link: "#",
+  },
+  {
+    title: "Watch Shop Management",
+    desc: "Responsive web interface for product browsing, ordering, POS, and account management with organized layouts and integrated customer/admin features.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    link: "#",
+  },
+  {
+    title: "Coffee Shop System",
+    desc: "Full-stack web application for product browsing, ordering, POS, and account management simulating real-world coffee shop operations.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     link: "#",
   },
 ];
@@ -40,10 +57,7 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
   const handleSubmit = (e) => {
@@ -59,19 +73,20 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#111] text-[#e8e0d0] min-h-screen font-sans text-[16px] md:text-[18px] overflow-x-hidden">
+    <div className="bg-[#111] text-[#e8e0d0] min-h-screen font-sans overflow-x-hidden">
 
-      {/* NAVBAR */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111]/90 backdrop-blur border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-7 py-4 sm:py-5 flex justify-between items-center">
-          <span className="text-sm sm:text-lg tracking-widest text-[#aaa] uppercase">Mike Lenard</span>
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-4 flex justify-between items-center">
+          <span className="text-sm tracking-widest text-[#aaa] uppercase">Mike Lenard V. Adriano</span>
+
           <ul className="hidden md:flex gap-8">
             {navLinks.map((link) => (
               <li key={link}>
                 <button
                   onClick={() => scrollTo(link)}
-                  className={`text-lg tracking-wide transition-colors ${
-                    active === link ? "text-[#e8e0d0]" : "text-[#777] hover:text-[#ccc]"
+                  className={`text-base tracking-wide transition-colors ${
+                    active === link ? "text-[#e8e0d0]" : "text-[#666] hover:text-[#bbb]"
                   }`}
                 >
                   {link}
@@ -100,25 +115,25 @@ export default function App() {
         </div>
       </nav>
 
+      {/* ── MOBILE MENU OVERLAY ── */}
       <div
         className={`fixed inset-0 z-[55] bg-black/55 transition-opacity duration-300 md:hidden ${
           isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
-
       <aside
-        className={`fixed top-0 right-0 h-screen z-[60] w-[78%] max-w-sm bg-[#161616] border-l border-white/10 p-6 pt-20 transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 h-screen z-[60] w-72 bg-[#161616] border-l border-white/10 px-6 pt-20 transition-transform duration-300 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-1">
           {navLinks.map((link) => (
             <li key={link}>
               <button
                 onClick={() => scrollTo(link)}
-                className={`w-full text-left px-4 py-3 rounded-xl text-lg tracking-wide transition-colors ${
-                  active === link ? "bg-white/10 text-[#e8e0d0]" : "text-[#aaa] hover:bg-white/5 hover:text-[#e8e0d0]"
+                className={`w-full text-left px-4 py-3 rounded-xl text-base tracking-wide transition-colors ${
+                  active === link ? "bg-white/10 text-[#e8e0d0]" : "text-[#999] hover:bg-white/5 hover:text-[#e8e0d0]"
                 }`}
               >
                 {link}
@@ -128,81 +143,95 @@ export default function App() {
         </ul>
       </aside>
 
-      {/* HOME HERO */}
-      <section id="home" className="relative h-[88vh] min-h-[520px] sm:min-h-[600px] max-h-[860px] overflow-hidden">
-
-        {/* Top labels */}
-        <div className="absolute top-20 sm:top-24 left-0 right-0 z-10">
-          <div className="max-w-7xl mx-auto px-6 sm:px-7 flex items-center justify-between">
-            <div className="text-xs sm:text-base text-[#999] tracking-widest uppercase">Creative Presentation</div>
-            <div className="text-[#999] text-lg sm:text-3xl">→</div>
+      {/* ── HERO ── */}
+      <section id="home" className="relative flex flex-col justify-center items-center h-screen min-h-[600px] max-h-[960px] overflow-hidden">
+        <div className="absolute top-20 left-0 right-0">
+          <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between items-center">
+            <span className="text-xs tracking-widest text-[#555] uppercase">Creative Presentation</span>
+            <span className="text-[#555] text-xl">→</span>
           </div>
         </div>
 
-        {/* Big PORTFOLIO text */}
-        <div
-          className="absolute inset-0 px-6 sm:px-8 md:px-4 pointer-events-none select-none z-0 flex justify-center items-center -translate-y-4 sm:-translate-y-6 md:-translate-y-10"
-        >
-          <div className="relative inline-block">
-            <p className="absolute -top-6 sm:-top-7 md:-top-10 right-0 md:-right-4 text-sm sm:text-xl md:text-4xl font-black text-[#e8e0d0] tracking-tight whitespace-nowrap">
-              I'M WEB DEVELOPER
-            </p>
-            <h1
-              className="font-black leading-none tracking-tight text-[#e8e0d0] whitespace-nowrap"
-              style={{ fontSize: "clamp(56px, 15vw, 220px)" }}
-            >
-              POR
-              <span style={{ WebkitTextStroke: "3px #e8e0d0", color: "transparent" }}>T</span>
-              FOLIO
-            </h1>
-            <p className="absolute top-full mt-2 md:mt-4 left-1 md:left-2 text-sm sm:text-xl md:text-4xl font-black text-[#e8e0d0] tracking-tight whitespace-nowrap">
-              DEVELOPER
-            </p>
-          </div>
+        <div className="relative select-none text-center px-4">
+          <h1
+            className="font-black leading-none tracking-tight text-[#e8e0d0]"
+            style={{ fontSize: "clamp(64px, 14vw, 200px)" }}
+          >
+            POR
+            <span style={{ WebkitTextStroke: "2px #e8e0d0", color: "transparent" }}>T</span>
+            FOLIO
+          </h1>
         </div>
 
-        {/* Bottom labels */}
-        <div className="absolute inset-0 flex justify-center items-end pb-8 md:pb-12 pointer-events-none z-20 -translate-y-10 sm:-translate-y-16 md:-translate-y-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs sm:text-base text-[#777] pointer-events-auto">
-            <div>Mike Lenard</div>
-            <div>www.reallygreatsite.com</div>
+        <div className="absolute bottom-10 left-0 right-0">
+          <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between text-xs sm:text-sm text-[#555]">
+            <span>Mike Lenard V. Adriano</span>
+            <span>mikelenard2004@gmail.com</span>
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="max-w-7xl mx-auto px-5 sm:px-8 py-20 md:py-32">
-        <p className="text-base tracking-widest text-[#777] uppercase mb-6">01 — About Me</p>
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-10 md:mb-12">Hi, I'm Anna.</h2>
-        <div className="grid md:grid-cols-2 gap-8 md:gap-16 text-[#bbb] leading-relaxed text-base sm:text-lg md:text-xl">
-          <p>
-            I'm a Grade 12 student from Manila, Philippines, currently learning web development.
-            I started coding last year and I've been enjoying it ever since — especially building
-            things I can actually see and click on.
-          </p>
-          <p>
-            When I'm not coding, I draw, listen to music, and binge-watch YouTube tutorials.
-            I'm planning to take up Computer Science in college and hopefully build cool stuff
-            someday.
-          </p>
+      {/* ── ABOUT ── */}
+      <section id="about" className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10">
+          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">01 — About</p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+              <p className="text-xs tracking-widest uppercase text-[#444] mb-3">Hi, I'm</p>
+              <h2
+                className="font-black text-[#e8e0d0] leading-none tracking-tight mb-8"
+                style={{ fontSize: "clamp(56px, 8vw, 96px)" }}
+              >
+                Mike Lenard.
+              </h2>
+              <div className="space-y-5 text-[#666] text-base sm:text-[17px] leading-[1.9]">
+                <p>
+                  Front-End Developer with a passion for building responsive, user-friendly web applications. Recently completed an internship developing e-commerce solutions using React, Tailwind CSS, and modern web technologies. Specialized in Web and Mobile Application Development.
+                </p>
+                <p className="text-[#555]">
+                  BS Information Technology student at Bulacan State University. Experienced in full-stack development with expertise in HTML, CSS, JavaScript, PHP, MySQL, and emerging technologies like React and Django.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {["Angat, Bulacan", "Front-End Dev", "Full-Stack Ready", "Open to Opportunities"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="text-[11px] tracking-widest uppercase px-4 py-2 border border-white/10 rounded text-[#555]"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <img
+                src={aboutImage}
+                alt="Anna portrait"
+                className="w-full rounded-2xl object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section id="skills" className="bg-white/5 py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <p className="text-base tracking-widest text-[#777] uppercase mb-6">02 — Skills</p>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-10 md:mb-14">What I know so far</h2>
+      {/* ── SKILLS ── */}
+      <section id="skills" className="py-24 md:py-32 bg-white/[0.03]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10">
+          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">02 — Skills</p>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-14">What I know so far</h2>
+
           <div className="grid sm:grid-cols-2 gap-8">
             {skills.map((skill) => (
               <div key={skill.name}>
-                <div className="flex justify-between text-base sm:text-lg mb-3">
+                <div className="flex justify-between text-sm sm:text-base mb-3">
                   <span className="text-[#e8e0d0]">{skill.name}</span>
-                  <span className="text-[#777]">{skill.level}%</span>
+                  <span className="text-[#555]">{skill.level}%</span>
                 </div>
-                <div className="w-full bg-white/10 rounded-full h-3">
+                <div className="w-full bg-white/10 rounded-full h-2.5">
                   <div
-                    className="bg-[#e8e0d0] h-3 rounded-full"
+                    className="bg-[#e8e0d0] h-2.5 rounded-full transition-all"
                     style={{ width: `${skill.level}%` }}
                   />
                 </div>
@@ -212,98 +241,100 @@ export default function App() {
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section id="projects" className="max-w-7xl mx-auto px-5 sm:px-8 py-20 md:py-32">
-        <p className="text-base tracking-widest text-[#777] uppercase mb-6">03 — Projects</p>
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-10 md:mb-14">Things I've built</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((p) => (
-            <div
-              key={p.title}
-              className="border border-white/10 rounded-3xl p-6 md:p-8 flex flex-col gap-5 hover:border-white/25 transition-colors"
-            >
-              <h3 className="text-xl sm:text-2xl font-semibold">{p.title}</h3>
-              <p className="text-[#999] text-base sm:text-lg leading-relaxed flex-1">{p.desc}</p>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {p.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="text-sm sm:text-base px-3 py-1.5 border border-white/15 rounded-full text-[#aaa]"
-                  >
-                    {t}
-                  </span>
-                ))}
+      {/* ── PROJECTS ── */}
+      <section id="projects" className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10">
+          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">03 — Projects</p>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-14">Things I've built</h2>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((p) => (
+              <div
+                key={p.title}
+                className="border border-white/10 rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 transition-colors"
+              >
+                <h3 className="text-lg sm:text-xl font-semibold">{p.title}</h3>
+                <p className="text-[#777] text-sm sm:text-base leading-relaxed flex-1">{p.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {p.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs sm:text-sm px-3 py-1 border border-white/10 rounded-full text-[#888]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a href={p.link} className="text-sm text-[#e8e0d0] underline underline-offset-4 mt-1 w-fit hover:text-white transition-colors">
+                  View project →
+                </a>
               </div>
-              <a
-                href={p.link}
-                className="text-base text-[#e8e0d0] underline underline-offset-4 mt-3 w-fit"
-              >
-                View project →
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="bg-white/5 py-20 md:py-32">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <p className="text-base tracking-widest text-[#777] uppercase mb-6">04 — Contact</p>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4">Get in touch</h2>
-          <p className="text-[#999] mb-10 md:mb-12 text-base sm:text-lg">
-            Have questions or just want to say hi? Send me a message!
-          </p>
-
-          {sent ? (
-            <div className="border border-white/15 rounded-3xl p-8 md:p-12 text-center text-[#bbb] text-lg sm:text-xl">
-              <p className="text-4xl mb-4">✓</p>
-              <p>Message sent! I'll get back to you soon.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              <input
-                type="text"
-                placeholder="Your name"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="bg-transparent border border-white/15 rounded-xl px-5 sm:px-6 py-4 sm:py-5 text-base sm:text-lg text-[#e8e0d0] placeholder-[#555] focus:outline-none focus:border-white/35 transition-colors"
-              />
-              <input
-                type="email"
-                placeholder="Your email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="bg-transparent border border-white/15 rounded-xl px-5 sm:px-6 py-4 sm:py-5 text-base sm:text-lg text-[#e8e0d0] placeholder-[#555] focus:outline-none focus:border-white/35 transition-colors"
-              />
-              <textarea
-                placeholder="Your message"
-                rows={6}
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="bg-transparent border border-white/15 rounded-xl px-5 sm:px-6 py-4 sm:py-5 text-base sm:text-lg text-[#e8e0d0] placeholder-[#555] focus:outline-none focus:border-white/35 transition-colors resize-none"
-              />
-              <button
-                type="submit"
-                className="bg-[#e8e0d0] text-[#111] rounded-xl py-4 sm:py-5 text-base sm:text-lg font-semibold hover:bg-white transition-colors"
-              >
-                Send message
-              </button>
-            </form>
-          )}
-
-          <div className="mt-12 md:mt-14 flex flex-col sm:flex-row gap-3 sm:gap-8 text-sm sm:text-base text-[#666]">
-            <span>📧 anna@email.com</span>
-            <span>📍 Manila, Philippines</span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 py-6 sm:py-8 text-center text-sm sm:text-base text-[#555] px-4">
-        Built with React + Tailwind CSS · Mike Lenard · 2025
+      {/* ── CONTACT ── */}
+      <section id="contact" className="py-24 md:py-32 bg-white/[0.03]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10">
+          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">04 — Contact</p>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-3">Get in touch</h2>
+          <p className="text-[#777] mb-12 text-base sm:text-lg">
+            Have questions or just want to say hi? Send me a message!
+          </p>
+
+          <div className="max-w-2xl">
+            {sent ? (
+              <div className="border border-white/10 rounded-2xl p-10 text-center text-[#888]">
+                <p className="text-3xl mb-4">✓</p>
+                <p className="text-base sm:text-lg">Message sent! I'll get back to you soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors"
+                />
+                <textarea
+                  placeholder="Your message"
+                  rows={6}
+                  required
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors resize-none"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#e8e0d0] text-[#111] rounded-xl py-4 text-base font-semibold hover:bg-white transition-colors"
+                >
+                  Send message
+                </button>
+              </form>
+            )}
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-8 text-sm text-[#555]">
+              <span>mikelenard2004@gmail.com</span>
+              <span>+63 993 710 3961</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-white/10 py-6 text-center text-sm text-[#444]">
+        Built with React + Tailwind CSS · Mike Lenard V. Adriano · 2025
       </footer>
 
     </div>
