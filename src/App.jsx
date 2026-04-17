@@ -3,17 +3,73 @@ import aboutImage from "./assets/aboutme.png";
 
 const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
-const skills = [
-  { name: "HTML", level: 95 },
-  { name: "CSS", level: 90 },
-  { name: "JavaScript", level: 85 },
-  { name: "React", level: 75 },
-  { name: "Tailwind CSS", level: 85 },
-  { name: "Bootstrap", level: 80 },
-  { name: "PHP", level: 80 },
-  { name: "MySQL", level: 85 },
-  { name: "Java", level: 70 },
-  { name: "Git & GitHub", level: 75 },
+const technicalSkills = [
+  {
+    category: "WEB DEVELOPMENT",
+    icon: "✦",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "PHP", "Django", "ClojureScript"],
+    iconColor: "text-emerald-500"
+  },
+  {
+    category: "UI/STYLING",
+    icon: "◆",
+    skills: ["Tailwind CSS", "Bootstrap"],
+    iconColor: "text-purple-500"
+  },
+  {
+    category: "MOBILE DEVELOPMENT",
+    icon: "◉",
+    skills: ["Flutter", "Dart"],
+    iconColor: "text-cyan-500"
+  },
+  {
+    category: "BACKEND DEVELOPMENT",
+    icon: "◆",
+    skills: ["Node.js", "Express.js", "Supabase"],
+    iconColor: "text-orange-500"
+  },
+  {
+    category: "DATABASE",
+    icon: "◈",
+    skills: ["MySQL", "SQLite", "Supabase (PostgreSQL)"],
+    iconColor: "text-amber-500"
+  },
+  {
+    category: "GAME DEVELOPMENT",
+    icon: "◆",
+    skills: ["C#", "Unity 2D & 3D"],
+    iconColor: "text-pink-500"
+  },
+  {
+    category: "PROGRAMMING LANGUAGES",
+    icon: "◈",
+    skills: ["JavaScript", "Python", "Java", "C#", "C++ (basic)", "Dart"],
+    iconColor: "text-green-500"
+  },
+  {
+    category: "VERSION CONTROL & DEPLOYMENT",
+    icon: "◈",
+    skills: ["Git", "GitHub", "Vercel"],
+    iconColor: "text-green-500"
+  },
+  {
+    category: "APIs & DATA HANDLING",
+    icon: "◆",
+    skills: ["REST API Integration", "JSON"],
+    iconColor: "text-blue-500"
+  },
+  {
+    category: "SOFTWARE DEV CONCEPTS",
+    icon: "◉",
+    skills: ["Front-End Development", "Back-End Development", "Full-Stack Development", "Responsive Design", "UNIX Basics", "Authentication Systems"],
+    iconColor: "text-blue-500"
+  },
+  {
+    category: "TOOLS & ENVIRONMENT",
+    icon: "◇",
+    skills: ["VS Code", "Android Studio", "Unity Editor", "XAMPP"],
+    iconColor: "text-gray-500"
+  }
 ];
 
 const projects = [
@@ -54,6 +110,14 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const cardShellClass =
+    "overflow-hidden rounded-[20px] border border-[#3c3933] bg-[#171717] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:-translate-y-1";
+  const cardHeaderClass =
+    "border-b border-[#3c3933] bg-[#e8dfcf] px-6 py-5 text-[#111111]";
+  const cardTitleClass =
+    "text-[1.05rem] font-black uppercase leading-none tracking-[-0.03em] sm:text-[1.2rem]";
+  const tagClass =
+    "rounded-[10px] border border-[#4d4d4d] px-4 py-2 text-sm text-[#d8d1c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]";
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -78,7 +142,7 @@ export default function App() {
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111]/90 backdrop-blur border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-4 flex justify-between items-center">
-          <span className="text-sm tracking-widest text-[#aaa] uppercase">Mike Lenard V. Adriano</span>
+          <span className="text-sm tracking-widest text-[#aaa] uppercase">Mayk</span>
 
           <ul className="hidden md:flex gap-8">
             {navLinks.map((link) => (
@@ -147,8 +211,10 @@ export default function App() {
       <section id="home" className="relative flex flex-col justify-center items-center h-screen min-h-[600px] max-h-[960px] overflow-hidden">
         <div className="absolute top-20 left-0 right-0">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between items-center">
-            <span className="text-xs tracking-widest text-[#555] uppercase">Creative Presentation</span>
-            <span className="text-[#555] text-xl">→</span>
+            <span className="text-xs tracking-widest text-[#555] uppercase">Mike Lenard V. Adriano</span>
+            <button className="text-xs tracking-widest text-[#555] uppercase underline underline-offset-4 hover:text-[#e8e0d0] transition-colors">
+              View Resume →
+            </button>
           </div>
         </div>
 
@@ -165,8 +231,8 @@ export default function App() {
 
         <div className="absolute bottom-10 left-0 right-0">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between text-xs sm:text-sm text-[#555]">
-            <span>Mike Lenard V. Adriano</span>
             <span>mikelenard2004@gmail.com</span>
+            <span>https://github.com/MKLNRD-ADR/</span>
           </div>
         </div>
       </section>
@@ -219,21 +285,27 @@ export default function App() {
       {/* ── SKILLS ── */}
       <section id="skills" className="py-24 md:py-32 bg-white/[0.03]">
         <div className="max-w-6xl mx-auto px-6 sm:px-10">
-          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">02 — Skills</p>
+          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">02 — Technical Skills</p>
           <h2 className="text-3xl sm:text-5xl font-bold mb-14">What I know so far</h2>
 
-          <div className="grid sm:grid-cols-2 gap-8">
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between text-sm sm:text-base mb-3">
-                  <span className="text-[#e8e0d0]">{skill.name}</span>
-                  <span className="text-[#555]">{skill.level}%</span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {technicalSkills.map((skillGroup) => (
+              <div
+                key={skillGroup.category}
+                className={cardShellClass}
+              >
+                <div className={cardHeaderClass}>
+                  <h3 className={cardTitleClass}>{skillGroup.category}</h3>
                 </div>
-                <div className="w-full bg-white/10 rounded-full h-2.5">
-                  <div
-                    className="bg-[#e8e0d0] h-2.5 rounded-full transition-all"
-                    style={{ width: `${skill.level}%` }}
-                  />
+                <div className="flex flex-wrap gap-3 px-6 py-8">
+                  {skillGroup.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={tagClass}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
@@ -251,23 +323,27 @@ export default function App() {
             {projects.map((p) => (
               <div
                 key={p.title}
-                className="border border-white/10 rounded-2xl p-7 flex flex-col gap-4 hover:border-white/20 transition-colors"
+                className={`${cardShellClass} flex flex-col`}
               >
-                <h3 className="text-lg sm:text-xl font-semibold">{p.title}</h3>
-                <p className="text-[#777] text-sm sm:text-base leading-relaxed flex-1">{p.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs sm:text-sm px-3 py-1 border border-white/10 rounded-full text-[#888]"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                <div className={cardHeaderClass}>
+                  <h3 className={cardTitleClass}>{p.title}</h3>
                 </div>
-                <a href={p.link} className="text-sm text-[#e8e0d0] underline underline-offset-4 mt-1 w-fit hover:text-white transition-colors">
-                  View project →
-                </a>
+                <div className="flex flex-1 flex-col gap-5 px-6 py-8">
+                  <p className="flex-1 text-sm leading-relaxed text-[#9d968b] sm:text-base">{p.desc}</p>
+                  <div className="flex flex-wrap gap-3">
+                    {p.tech.map((t) => (
+                      <span
+                        key={t}
+                        className={tagClass}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <a href={p.link} className="mt-1 w-fit text-sm text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white">
+                    View project {"->"}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -340,3 +416,4 @@ export default function App() {
     </div>
   );
 }
+
