@@ -1,89 +1,57 @@
 import { useEffect, useState } from "react";
 import aboutImage from "./assets/aboutme.png";
 
+// ─── TYPE SYSTEM ────────────────────────────────────────────────
+// Font: Plus Jakarta Sans (add to index.html ↓)
+//   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+//
+// Scale:
+//   Display  → font-[900] tracking-[-0.04em]   (Hero h1, section name h2)
+//   Heading  → font-[800] tracking-[-0.03em]   (card titles)
+//   Label    → font-[600] tracking-[0.12em] uppercase text-[11px]  (section labels, nav chips)
+//   Body     → font-[400] leading-[1.85]        (paragraphs)
+//   UI       → font-[500]                       (buttons, inputs, tags, nav links)
+// ────────────────────────────────────────────────────────────────
+
 const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
 const technicalSkills = [
   {
-    category: "WEB DEVELOPMENT",
-    icon: "✦",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "PHP", "Django", "ClojureScript"],
-    iconColor: "text-emerald-500"
+    category: "Frontend",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "Responsive Design"],
   },
   {
-    category: "UI/STYLING",
-    icon: "◆",
-    skills: ["Tailwind CSS", "Bootstrap"],
-    iconColor: "text-purple-500"
+    category: "Backend",
+    skills: ["Node.js", "Express.js", "PHP", "Django"],
   },
   {
-    category: "MOBILE DEVELOPMENT",
-    icon: "◉",
+    category: "Database",
+    skills: ["MySQL", "SQLite", "PostgreSQL", "Supabase"],
+  },
+  {
+    category: "Mobile",
     skills: ["Flutter", "Dart"],
-    iconColor: "text-cyan-500"
   },
   {
-    category: "BACKEND DEVELOPMENT",
-    icon: "◆",
-    skills: ["Node.js", "Express.js", "Supabase"],
-    iconColor: "text-orange-500"
+    category: "Programming Languages",
+    skills: ["JavaScript", "Python", "Java", "C#", "Dart"],
   },
   {
-    category: "DATABASE",
-    icon: "◈",
-    skills: ["MySQL", "SQLite", "Supabase (PostgreSQL)"],
-    iconColor: "text-amber-500"
+    category: "Tools",
+    skills: ["Git", "GitHub", "Vercel", "VS Code"],
   },
   {
-    category: "GAME DEVELOPMENT",
-    icon: "◆",
-    skills: ["C#", "Unity 2D & 3D"],
-    iconColor: "text-pink-500"
-  },
-  {
-    category: "PROGRAMMING LANGUAGES",
-    icon: "◈",
-    skills: ["JavaScript", "Python", "Java", "C#", "C++ (basic)", "Dart"],
-    iconColor: "text-green-500"
-  },
-  {
-    category: "VERSION CONTROL & DEPLOYMENT",
-    icon: "◈",
-    skills: ["Git", "GitHub", "Vercel"],
-    iconColor: "text-green-500"
-  },
-  {
-    category: "APIs & DATA HANDLING",
-    icon: "◆",
+    category: "APIs & Data",
     skills: ["REST API Integration", "JSON"],
-    iconColor: "text-blue-500"
   },
-  {
-    category: "SOFTWARE DEV CONCEPTS",
-    icon: "◉",
-    skills: ["Front-End Development", "Back-End Development", "Full-Stack Development", "Responsive Design", "UNIX Basics", "Authentication Systems"],
-    iconColor: "text-blue-500"
-  },
-  {
-    category: "TOOLS & ENVIRONMENT",
-    icon: "◇",
-    skills: ["VS Code", "Android Studio", "Unity Editor", "XAMPP"],
-    iconColor: "text-gray-500"
-  }
 ];
 
 const projects = [
   {
     title: "FireQuakeEscape",
     desc: "Web system and admin panel for a 3D evacuation simulation game with account management and performance tracking. Automated calculations for 200+ students' progress.",
-    tech: ["React", "JavaScript", "MySQL"],
-    link: "#",
-  },
-  {
-    title: "E-commerce Website",
-    desc: "Developed responsive front-end pages using OpenCart (Twig), HTML, CSS, and Bootstrap. Improved UI consistency while collaborating with backend developers via GitHub.",
-    tech: ["HTML", "CSS", "Twig", "Bootstrap"],
-    link: "#",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind", "Bootstrap"],
+    link: "https://firequakeescape.capstone-two.com/",
   },
   {
     title: "Payroll System",
@@ -105,19 +73,30 @@ const projects = [
   },
 ];
 
+// ─── SHARED CLASS TOKENS ─────────────────────────────────────────
+// Label: used for "01 — About", nav links label variants, chip text
+const LABEL = "text-[11px] font-semibold tracking-[0.12em] uppercase";
+
+// Card shell
+const CARD_SHELL =
+  "overflow-hidden rounded-[20px] border border-[#3c3933] bg-[#171717] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:-translate-y-1";
+
+// Card header
+const CARD_HEADER = "border-b border-[#3c3933] bg-[#e8dfcf] px-6 py-5 text-[#111111]";
+
+// Card title — heading weight
+const CARD_TITLE = "text-[0.95rem] font-extrabold tracking-[-0.03em] leading-none";
+
+// Tag pill
+const TAG =
+  "rounded-[10px] border border-[#4d4d4d] px-4 py-2 text-[13px] font-medium text-[#d8d1c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]";
+// ─────────────────────────────────────────────────────────────────
+
 export default function App() {
   const [active, setActive] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
-  const cardShellClass =
-    "overflow-hidden rounded-[20px] border border-[#3c3933] bg-[#171717] shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:-translate-y-1";
-  const cardHeaderClass =
-    "border-b border-[#3c3933] bg-[#e8dfcf] px-6 py-5 text-[#111111]";
-  const cardTitleClass =
-    "text-[1.05rem] font-black uppercase leading-none tracking-[-0.03em] sm:text-[1.2rem]";
-  const tagClass =
-    "rounded-[10px] border border-[#4d4d4d] px-4 py-2 text-sm text-[#d8d1c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]";
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -137,19 +116,24 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#111] text-[#e8e0d0] min-h-screen font-sans overflow-x-hidden">
+    // Root: single font family declared here, all children inherit
+    <div
+      className="bg-[#111] text-[#e8e0d0] min-h-screen overflow-x-hidden"
+      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+    >
 
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111]/90 backdrop-blur border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-4 flex justify-between items-center">
-          <span className="text-sm tracking-widest text-[#aaa] uppercase">Mayk</span>
+          {/* Brand — label weight */}
+          <span className={`${LABEL} text-[#aaa]`}>Mayk</span>
 
           <ul className="hidden md:flex gap-8">
             {navLinks.map((link) => (
               <li key={link}>
                 <button
                   onClick={() => scrollTo(link)}
-                  className={`text-base tracking-wide transition-colors ${
+                  className={`text-[14px] font-medium tracking-wide transition-colors ${
                     active === link ? "text-[#e8e0d0]" : "text-[#666] hover:text-[#bbb]"
                   }`}
                 >
@@ -196,7 +180,7 @@ export default function App() {
             <li key={link}>
               <button
                 onClick={() => scrollTo(link)}
-                className={`w-full text-left px-4 py-3 rounded-xl text-base tracking-wide transition-colors ${
+                className={`w-full text-left px-4 py-3 rounded-xl text-[14px] font-medium tracking-wide transition-colors ${
                   active === link ? "bg-white/10 text-[#e8e0d0]" : "text-[#999] hover:bg-white/5 hover:text-[#e8e0d0]"
                 }`}
               >
@@ -209,19 +193,25 @@ export default function App() {
 
       {/* ── HERO ── */}
       <section id="home" className="relative flex flex-col justify-center items-center h-screen min-h-[600px] max-h-[960px] overflow-hidden">
+        {/* Top meta row */}
         <div className="absolute top-20 left-0 right-0">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between items-center">
-            <span className="text-xs tracking-widest text-[#555] uppercase">Mike Lenard V. Adriano</span>
-            <button className="text-xs tracking-widest text-[#555] uppercase underline underline-offset-4 hover:text-[#e8e0d0] transition-colors">
+            {/* Label weight — same as navbar brand */}
+            <span className={`${LABEL} text-[#555]`}>Mike Lenard V. Adriano</span>
+            <button className={`${LABEL} text-[#555] underline underline-offset-4 hover:text-[#e8e0d0] transition-colors`}>
               View Resume →
             </button>
           </div>
         </div>
 
-        <div className="relative select-none text-center px-4">
+        {/* Display heading — centered at all zoom levels */}
+        <div className="relative select-none w-full px-6 sm:px-10 flex justify-center">
           <h1
-            className="font-black leading-none tracking-tight text-[#e8e0d0]"
-            style={{ fontSize: "clamp(64px, 14vw, 200px)" }}
+            className="font-black leading-none text-[#e8e0d0] text-center"
+            style={{
+              fontSize: "clamp(52px, 11.5vw, 172px)",
+              letterSpacing: "-0.04em",
+            }}
           >
             POR
             <span style={{ WebkitTextStroke: "2px #e8e0d0", color: "transparent" }}>T</span>
@@ -229,29 +219,33 @@ export default function App() {
           </h1>
         </div>
 
+        {/* Bottom meta row — stacked on mobile, side-by-side on sm+ */}
         <div className="absolute bottom-10 left-0 right-0">
-          <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between text-xs sm:text-sm text-[#555]">
-            <span>mikelenard2004@gmail.com</span>
-            <span>https://github.com/MKLNRD-ADR/</span>
+          <div className="max-w-6xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
+            <span className={`${LABEL} text-[#555]`}>mikelenard2004@gmail.com</span>
+            <span className={`${LABEL} text-[#555]`}>github.com/MKLNRD-ADR</span>
           </div>
         </div>
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" className="py-24 md:py-32">
+      <section id="about" className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 sm:px-10">
-          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">01 — About</p>
+          <p className={`${LABEL} text-[#666] mb-8`}>01 — About</p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
-              <p className="text-xs tracking-widest uppercase text-[#444] mb-3">Hi, I'm</p>
+              <p className={`${LABEL} text-[#444] mb-2`}>Hi, I'm</p>
               <h2
-                className="font-black text-[#e8e0d0] leading-none tracking-tight mb-8"
-                style={{ fontSize: "clamp(56px, 8vw, 96px)" }}
+                className="font-black text-[#e8e0d0] leading-none mb-6"
+                style={{
+                  fontSize: "clamp(32px, 4.5vw, 56px)",
+                  letterSpacing: "-0.04em",
+                }}
               >
                 Mike Lenard.
               </h2>
-              <div className="space-y-5 text-[#666] text-base sm:text-[17px] leading-[1.9]">
+              <div className="space-y-4 text-[#666] text-[15px] font-normal leading-[1.85]">
                 <p>
                   Front-End Developer with a passion for building responsive, user-friendly web applications. Recently completed an internship developing e-commerce solutions using React, Tailwind CSS, and modern web technologies. Specialized in Web and Mobile Application Development.
                 </p>
@@ -259,23 +253,21 @@ export default function App() {
                   BS Information Technology student at Bulacan State University. Experienced in full-stack development with expertise in HTML, CSS, JavaScript, PHP, MySQL, and emerging technologies like React and Django.
                 </p>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {["Angat, Bulacan", "Front-End Dev", "Full-Stack Ready", "Open to Opportunities"].map((chip) => (
-                  <span
-                    key={chip}
-                    className="text-[11px] tracking-widest uppercase px-4 py-2 border border-white/10 rounded text-[#555]"
-                  >
+                  <span key={chip} className={`${LABEL} px-3 py-1.5 border border-white/10 rounded text-[#555]`}>
                     {chip}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div>
+            {/* Image — capped so it doesn't dominate */}
+            <div className="flex justify-center lg:justify-end">
               <img
                 src={aboutImage}
-                alt="Anna portrait"
-                className="w-full rounded-2xl object-cover"
+                alt="Mike Lenard portrait"
+                className="w-full max-w-[320px] lg:max-w-[360px] rounded-2xl object-cover"
               />
             </div>
           </div>
@@ -285,26 +277,25 @@ export default function App() {
       {/* ── SKILLS ── */}
       <section id="skills" className="py-24 md:py-32 bg-white/[0.03]">
         <div className="max-w-6xl mx-auto px-6 sm:px-10">
-          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">02 — Technical Skills</p>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-14">What I know so far</h2>
+          <p className={`${LABEL} text-[#666] mb-12`}>02 — Technical Skills</p>
+          {/* Section heading — extrabold, tight tracking (one step below display) */}
+          <h2
+            className="font-extrabold text-[#e8e0d0] mb-14"
+            style={{ fontSize: "clamp(28px, 5vw, 48px)", letterSpacing: "-0.03em" }}
+          >
+            What I know so far
+          </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {technicalSkills.map((skillGroup) => (
-              <div
-                key={skillGroup.category}
-                className={cardShellClass}
-              >
-                <div className={cardHeaderClass}>
-                  <h3 className={cardTitleClass}>{skillGroup.category}</h3>
+              <div key={skillGroup.category} className={CARD_SHELL}>
+                <div className={CARD_HEADER}>
+                  {/* Card title — heading weight */}
+                  <h3 className={CARD_TITLE}>{skillGroup.category}</h3>
                 </div>
                 <div className="flex flex-wrap gap-3 px-6 py-8">
                   {skillGroup.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className={tagClass}
-                    >
-                      {skill}
-                    </span>
+                    <span key={skill} className={TAG}>{skill}</span>
                   ))}
                 </div>
               </div>
@@ -316,32 +307,36 @@ export default function App() {
       {/* ── PROJECTS ── */}
       <section id="projects" className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 sm:px-10">
-          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">03 — Projects</p>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-14">Things I've built</h2>
+          <p className={`${LABEL} text-[#666] mb-12`}>03 — Projects</p>
+          <h2
+            className="font-extrabold text-[#e8e0d0] mb-14"
+            style={{ fontSize: "clamp(28px, 5vw, 48px)", letterSpacing: "-0.03em" }}
+          >
+            Things I've built
+          </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((p) => (
-              <div
-                key={p.title}
-                className={`${cardShellClass} flex flex-col`}
-              >
-                <div className={cardHeaderClass}>
-                  <h3 className={cardTitleClass}>{p.title}</h3>
+              <div key={p.title} className={`${CARD_SHELL} flex flex-col`}>
+                <div className={CARD_HEADER}>
+                  <h3 className={CARD_TITLE}>{p.title}</h3>
                 </div>
                 <div className="flex flex-1 flex-col gap-5 px-6 py-8">
-                  <p className="flex-1 text-sm leading-relaxed text-[#9d968b] sm:text-base">{p.desc}</p>
+                  {/* Card body — same body spec as About */}
+                  <p className="flex-1 text-[14px] font-normal leading-[1.85] text-[#9d968b]">
+                    {p.desc}
+                  </p>
                   <div className="flex flex-wrap gap-3">
                     {p.tech.map((t) => (
-                      <span
-                        key={t}
-                        className={tagClass}
-                      >
-                        {t}
-                      </span>
+                      <span key={t} className={TAG}>{t}</span>
                     ))}
                   </div>
-                  <a href={p.link} className="mt-1 w-fit text-sm text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white">
-                    View project {"->"}
+                  {/* Link — UI weight */}
+                  <a
+                    href={p.link}
+                    className="mt-1 w-fit text-[13px] font-medium text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white"
+                  >
+                    View project →
                   </a>
                 </div>
               </div>
@@ -353,9 +348,15 @@ export default function App() {
       {/* ── CONTACT ── */}
       <section id="contact" className="py-24 md:py-32 bg-white/[0.03]">
         <div className="max-w-6xl mx-auto px-6 sm:px-10">
-          <p className="text-sm tracking-widest text-[#666] uppercase mb-12">04 — Contact</p>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-3">Get in touch</h2>
-          <p className="text-[#777] mb-12 text-base sm:text-lg">
+          <p className={`${LABEL} text-[#666] mb-12`}>04 — Contact</p>
+          <h2
+            className="font-extrabold text-[#e8e0d0] mb-3"
+            style={{ fontSize: "clamp(28px, 5vw, 48px)", letterSpacing: "-0.03em" }}
+          >
+            Get in touch
+          </h2>
+          {/* Subtitle — body weight */}
+          <p className="text-[#777] mb-12 text-[16px] font-normal leading-[1.85]">
             Have questions or just want to say hi? Send me a message!
           </p>
 
@@ -363,57 +364,59 @@ export default function App() {
             {sent ? (
               <div className="border border-white/10 rounded-2xl p-10 text-center text-[#888]">
                 <p className="text-3xl mb-4">✓</p>
-                <p className="text-base sm:text-lg">Message sent! I'll get back to you soon.</p>
+                <p className="text-[16px] font-normal">Message sent! I'll get back to you soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors"
-                />
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors"
-                />
+                {/* Inputs — UI weight, consistent placeholder style */}
+                {[
+                  { type: "text",  placeholder: "Your name",  key: "name",    value: form.name },
+                  { type: "email", placeholder: "Your email", key: "email",   value: form.email },
+                ].map(({ type, placeholder, key, value }) => (
+                  <input
+                    key={key}
+                    type={type}
+                    placeholder={placeholder}
+                    required
+                    value={value}
+                    onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                    className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-[15px] font-medium text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors"
+                  />
+                ))}
                 <textarea
                   placeholder="Your message"
                   rows={6}
                   required
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-base text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors resize-none"
+                  className="bg-transparent border border-white/10 rounded-xl px-5 py-4 text-[15px] font-medium text-[#e8e0d0] placeholder-[#444] focus:outline-none focus:border-white/30 transition-colors resize-none"
                 />
+                {/* Button — UI weight */}
                 <button
                   type="submit"
-                  className="bg-[#e8e0d0] text-[#111] rounded-xl py-4 text-base font-semibold hover:bg-white transition-colors"
+                  className="bg-[#e8e0d0] text-[#111] rounded-xl py-4 text-[15px] font-semibold hover:bg-white transition-colors"
                 >
                   Send message
                 </button>
               </form>
             )}
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-8 text-sm text-[#555]">
-              <span>mikelenard2004@gmail.com</span>
-              <span>+63 993 710 3961</span>
+            {/* Contact details — label weight */}
+            <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-8">
+              <span className={`${LABEL} text-[#555]`}>mikelenard2004@gmail.com</span>
+              <span className={`${LABEL} text-[#555]`}>+63 993 710 3961</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-white/10 py-6 text-center text-sm text-[#444]">
-        Built with React + Tailwind CSS · Mike Lenard V. Adriano · 2025
+      <footer className="border-t border-white/10 py-6 text-center">
+        <span className={`${LABEL} text-[#444]`}>
+          Built with React + Tailwind CSS · Mike Lenard V. Adriano · 2025
+        </span>
       </footer>
 
     </div>
   );
 }
-
