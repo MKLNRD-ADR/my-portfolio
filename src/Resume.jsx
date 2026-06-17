@@ -55,13 +55,13 @@ const education = {
 };
 
 const techStack = [
-  { label: "Frontend",              items: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "Responsive Design"] },
-  { label: "Backend",               items: ["Node.js", "Express.js", "PHP", "Django"] },
-  { label: "Database",              items: ["MySQL", "SQLite", "PostgreSQL (Supabase)"] },
-  { label: "Mobile",                items: ["Flutter", "Dart"] },
+  { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "Responsive Design"] },
+  { label: "Backend", items: ["Node.js", "Express.js", "PHP", "Django"] },
+  { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL (Supabase)"] },
+  { label: "Mobile", items: ["Flutter", "Dart"] },
   { label: "Programming Languages", items: ["JavaScript", "Python", "Java", "C#", "Dart"] },
-  { label: "Tools",                 items: ["Git", "GitHub", "Vercel", "VS Code"] },
-  { label: "APIs & Data",           items: ["REST API Integration", "JSON"] },
+  { label: "Tools", items: ["Git", "GitHub", "Vercel", "VS Code"] },
+  { label: "APIs & Data", items: ["REST API Integration", "JSON"] },
 ];
 
 // ── Section wrapper ──────────────────────────────────────────────
@@ -129,7 +129,7 @@ export default function Resume() {
               Angat, Bulacan, Philippines
             </div>
             <p className="text-[13px] font-semibold text-[#9d968b] mb-4">
-              BSIT Student · Front-End Developer · Fresh Graduate
+              BSIT Student · Full-Stack Developer · Fresh Graduate
             </p>
             {/* Contact row */}
             <div className="flex flex-wrap gap-x-5 gap-y-1 mb-5">
@@ -144,9 +144,8 @@ export default function Resume() {
             {/* Buttons */}
             <div className="flex flex-wrap gap-3">
               <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/Mike_Lenard_Adriano_Resume.pdf"
+                download="Mike_Lenard_Adriano_Resume.pdf"
                 className="flex items-center gap-2 bg-[#e8dfcf] text-[#111] px-4 py-2 rounded-lg text-[13px] font-semibold hover:bg-white transition-colors"
               >
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">

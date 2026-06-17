@@ -254,14 +254,14 @@ export default function App() {
               </h2>
               <div className="space-y-4 text-[#666] text-[15px] font-normal leading-[1.85]">
                 <p>
-                  Front-End Developer with a passion for building responsive, user-friendly web applications. Recently completed an internship developing e-commerce solutions using React, Tailwind CSS, and modern web technologies. Specialized in Web and Mobile Application Development.
+                  A BS Information Technology student from Angat, Bulacan with a passion for creating modern, responsive, and user-friendly web applications. Through academic projects and internship experience, I have developed skills in HTML, CSS, JavaScript, React, PHP, MySQL, and modern development tools.
                 </p>
                 <p className="text-[#555]">
-                  BS Information Technology student at Bulacan State University. Experienced in full-stack development with expertise in HTML, CSS, JavaScript, PHP, MySQL, and emerging technologies like React and Django.
+                  I enjoy solving problems through technology and continuously improving my skills as a developer. My goal is to build impactful digital solutions, contribute to meaningful projects, and grow into a professional full-stack developer.
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-2">
-                {["Angat, Bulacan", "Front-End Dev", "Full-Stack Ready", "Open to Opportunities"].map((chip) => (
+                {["Angat, Bulacan", "Problem Solver", "Full-Stack Ready", "Open to Opportunities"].map((chip) => (
                   <span key={chip} className={`${LABEL} px-3 py-1.5 border border-white/10 rounded text-[#555]`}>
                     {chip}
                   </span>
@@ -449,9 +449,9 @@ export default function App() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955a1.5 1.5 0 012.092 0L22.25 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                     </svg>
                   ),
-                  label: "Our Office",
-                  line1: "3445 Oak Ridge Omaha,",
-                  line2: "QA 45610",
+                  label: "Home",
+                  line1: "124 Encanto, Angat, Bulacan",
+                  
                 },
               ].map(({ icon, label, line1, line2 }) => (
                 <div
