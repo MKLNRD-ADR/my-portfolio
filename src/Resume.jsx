@@ -8,8 +8,10 @@ const workExperience = [
     company: "E-commerce Website Project",
     period: "Dec 2025 – Mar 2026",
     bullets: [
-      "Developed and customized responsive front-end pages using OpenCart (Twig), HTML, CSS, JavaScript, Tailwind CSS, and Bootstrap while collaborating with backend developers through GitHub.",
-      "Improved user interface consistency and workflow efficiency by completing daily tasks, contributing to documentation, and supporting smooth system integration within the development team.",
+      "Developed and implemented responsive user interfaces for an e-commerce platform, ensuring consistent layout and functionality across desktop and mobile devices.",
+      "Built new features based on team and stakeholder requirements, from UI components to interactive elements.",
+      "Designed and integrated custom icons and visual assets to improve interface clarity and overall user experience.",
+      "Documented each development task and presented progress during team meetings; updated task status to 'Completed' upon stakeholder approval, maintaining a clear record of project progress.",
     ],
   },
 ];
@@ -20,28 +22,44 @@ const projects = [
     badge: "Best Capstone Project",
     role: "Web Developer",
     bullets: [
-      "Developed the web system and admin panel for a 3D evacuation simulation game with account management and performance tracking features.",
-      "Automated performance calculations for each student, each section, and overall — improving evaluation efficiency by 100% and allowing staff to quickly monitor over 200 students' progress.",
+      "Built the web platform and admin panel for a disaster-response capstone combining a 3D mobile game with a companion website.",
+      "Mobile component, built by teammates, modeled the BSU campus in Blender for a 3D fire and earthquake escape simulation.",
+      "Implemented role-based accounts — Admin, Staff, and Student — each with tailored access to section and performance data.",
+      "Automated performance tracking for 200+ students and added data filtering platform-wide, improving evaluation efficiency by 100%.",
     ],
     tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS", "Bootstrap"],
   },
   {
-    title: "Payroll System",
+    title: "TaskFlow",
     badge: null,
-    role: "Front-End Developer (with Back-End Support)",
+    role: "Full-Stack Developer",
     bullets: [
-      "Designed and developed the user interface for employee and admin payroll features including salary computation, payslips, and records management.",
-      "Enhanced usability and processing efficiency by enabling automated salary calculations, reducing manual errors in payroll handling.",
+      "Built a task management app that organizes notes into custom sections, with tasks added under each one.",
+      "Implemented fuzzy-matching duplicate detection to flag similar task titles even with typos, plus an AI-powered title-improvement suggestion feature.",
+      "Added voice-to-text input for task creation, due-date scheduling with automatic color-coded urgency indicators, and a completion checkbox.",
+      "Integrated an AI assistant that scans all sections and tasks to surface the one closest to its deadline, alongside filtering tools for managing large task lists.",
     ],
-    tech: ["Java", "MySQL", "HTML", "CSS"],
+    tech: ["Next.js", "React", "TypeScript", "Supabase", "OpenAI API"],
   },
   {
-    title: "Watch & Coffee Shop Management Systems",
+    title: "Pocketra",
     badge: null,
-    role: "Front-End Developer / Full-Stack Contributor",
+    role: "Mobile App Developer",
     bullets: [
-      "Developed responsive web interfaces for both a watch and coffee shop system, enabling product browsing, ordering, POS, and account management features.",
-      "Improved user experience and system functionality by implementing organized layouts, responsive design, and integrated customer and admin features simulating real-world operations.",
+      "Developed a finance app that lets users virtually divide their total balance into custom 'sections' (sub-wallets) for specific purposes, e.g., setting aside a fixed allowance while it stays part of the overall balance.",
+      "Enabled users to log expenses per section and track real-time totals for remaining balance and total amount spent.",
+    ],
+    tech: ["Flutter", "Dart", "Firebase"],
+  },
+  {
+    title: "Café Crème",
+    badge: null,
+    role: "Full-Stack Developer",
+    bullets: [
+      "Built a full-featured ordering and management web app with separate customer and admin interfaces.",
+      "Customer side: browse the menu, fully customize drinks, and place orders online.",
+      "Admin side: Point-of-Sale (POS) system, inventory management, product management, stock tracking, and a top-selling-items dashboard.",
+      "Added adjustable UI theming (background color customization) and data filtering across all major modules for faster searching and reporting.",
     ],
     tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
   },
@@ -55,13 +73,13 @@ const education = {
 };
 
 const techStack = [
-  { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "Responsive Design"] },
+  { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Bootstrap", "Responsive Design"] },
   { label: "Backend", items: ["Node.js", "Express.js", "PHP", "Django"] },
   { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL (Supabase)"] },
   { label: "Mobile", items: ["Flutter", "Dart"] },
-  { label: "Programming Languages", items: ["JavaScript", "Python", "Java", "C#", "Dart"] },
+  { label: "Programming Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "C#", "Dart"] },
   { label: "Tools", items: ["Git", "GitHub", "Vercel", "VS Code"] },
-  { label: "APIs & Data", items: ["REST API Integration", "JSON"] },
+  { label: "APIs & Data", items: ["REST API Integration", "OpenAI API", "JSON"] },
 ];
 
 // ── Section wrapper ──────────────────────────────────────────────
@@ -129,7 +147,7 @@ export default function Resume() {
               Angat, Bulacan, Philippines
             </div>
             <p className="text-[13px] font-semibold text-[#9d968b] mb-4">
-              BSIT Student · Full-Stack Developer · Fresh Graduate
+              Full-Stack Developer · Fresh BSIT Graduate
             </p>
             {/* Contact row */}
             <div className="flex flex-wrap gap-x-5 gap-y-1 mb-5">
