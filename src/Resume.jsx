@@ -39,7 +39,7 @@ const projects = [
       "Added voice-to-text input for task creation, due-date scheduling with automatic color-coded urgency indicators, and a completion checkbox.",
       "Integrated an AI assistant that scans all sections and tasks to surface the one closest to its deadline, alongside filtering tools for managing large task lists.",
     ],
-    tech: ["Next.js", "React", "TypeScript", "Supabase", "OpenAI API"],
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Groq API"],
   },
   {
     title: "Pocketra",
@@ -73,13 +73,13 @@ const education = {
 };
 
 const techStack = [
-  { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Bootstrap", "Responsive Design"] },
-  { label: "Backend", items: ["Node.js", "Express.js", "PHP", "Django"] },
-  { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL (Supabase)"] },
+  { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Bootstrap", "OpenCart (Twig)"] },
+  { label: "Backend", items: ["PHP", "Node.js", "Next.js (API Routes)"," C#"] },
+  { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL", "Supabase", "Firebase"] },
   { label: "Mobile", items: ["Flutter", "Dart"] },
-  { label: "Programming Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "C#", "Dart"] },
   { label: "Tools", items: ["Git", "GitHub", "Vercel", "VS Code"] },
-  { label: "APIs & Data", items: ["REST API Integration", "OpenAI API", "JSON"] },
+  { label: "APIs & Data", items: ["REST API Integration", "Groq API"] },
+  { label: "Familiar With (Coursework/School)", items: ["Java", "Django"] },
 ];
 
 // ── Section wrapper ──────────────────────────────────────────────

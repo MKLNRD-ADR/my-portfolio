@@ -18,23 +18,19 @@ const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 const technicalSkills = [
   {
     category: "Frontend",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "Responsive Design"],
+    skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Bootstrap", "OpenCart (Twig)"],
   },
   {
     category: "Backend",
-    skills: ["Node.js", "Express.js", "PHP", "Django"],
+    skills: ["PHP", "Node.js", "Next.js (API Routes)", "C#"],
   },
   {
     category: "Database",
-    skills: ["MySQL", "SQLite", "PostgreSQL", "Supabase"],
+    skills: ["MySQL", "SQLite", "PostgreSQL", "Supabase", "Firebase"],
   },
   {
     category: "Mobile",
     skills: ["Flutter", "Dart"],
-  },
-  {
-    category: "Programming Languages",
-    skills: ["JavaScript", "Python", "Java", "C#", "Dart"],
   },
   {
     category: "Tools",
@@ -42,40 +38,38 @@ const technicalSkills = [
   },
   {
     category: "APIs & Data",
-    skills: ["REST API Integration", "JSON"],
+    skills: ["REST API Integration", "Groq API"],
+  },
+  {
+    category: "Familiar With (Coursework/School)",
+    skills: ["Java", "Django"],
   },
 ];
 
 const projects = [
   {
     title: "FireQuakeEscape",
-    desc: "Web system and admin panel for a 3D evacuation simulation game with account management and performance tracking. Automated calculations for 200+ students' progress.",
-    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind", "Bootstrap"],
+    desc: "Built the web platform and admin panel for a disaster-response capstone combining a 3D mobile game with a companion website. Implemented role-based Admin, Staff, and Student accounts with automated performance tracking for 200+ students.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS", "Bootstrap"],
     link: "https://firequakeescape.capstone-two.com/",
   },
   {
-    title: "Payroll System",
-    desc: "User interface for employee and admin payroll features including salary computation, payslips, and records management with automated calculations.",
-    tech: ["Java", "MySQL", "HTML", "CSS"],
-    link: "#",
-  },
-  {
-    title: "Watch Shop Management",
-    desc: "Responsive web interface for product browsing, ordering, POS, and account management with organized layouts and integrated customer/admin features.",
-    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
-    link: "#",
-  },
-  {
-    title: "Coffee Shop System",
-    desc: "Full-stack web application for product browsing, ordering, POS, and account management simulating real-world coffee shop operations.",
-    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
-    link: "#",
-  },
-  {
-    title: "Taskflow",
-    desc: "AI-powered SaaS task management and note-taking platform with organized sections, smart filtering by completion status and due dates, intelligent duplicate detection with spelling tolerance, voice-to-task conversion, auto-correction, and AI chat assistant for searching tasks and prioritizing urgent items.",
-    tech: ["Next.js", "Node.js", "Supabase", "Tailwind CSS", "OpenAI API", "Vercel"],
+    title: "TaskFlow",
+    desc: "Built a task management app with custom sections, fuzzy duplicate detection, AI-powered title-improvement suggestions, voice-to-text task creation, due-date urgency indicators, and an AI assistant for surfacing urgent tasks.",
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Groq API"],
     link: "https://my-saas-app-virid.vercel.app/",
+  },
+  {
+    title: "Pocketra",
+    desc: "Developed a finance app that lets users divide their total balance into custom sections for specific purposes, log expenses per section, and track real-time remaining balance and total amount spent.",
+    tech: ["Flutter", "Dart", "Firebase"],
+    link: "https://pocketra-website.vercel.app/",
+  },
+  {
+    title: "Cafe Creme",
+    desc: "Built a full-featured ordering and management web app with customer and admin interfaces, online ordering, POS, inventory and product management, stock tracking, a top-selling-items dashboard, theming, and filtering.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    link: "#",
   },
 ];
 
