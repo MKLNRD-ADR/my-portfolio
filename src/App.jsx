@@ -38,7 +38,7 @@ const technicalSkills = [
   },
   {
     category: "APIs & Data",
-    skills: ["REST API Integration", "Groq API"],
+    skills: ["REST API Integration", "OpenAI API"],
   },
   {
     category: "Familiar With (Coursework/School)",
@@ -56,7 +56,7 @@ const projects = [
   {
     title: "TaskFlow",
     desc: "Built a task management app with custom sections, fuzzy duplicate detection, AI-powered title-improvement suggestions, voice-to-text task creation, due-date urgency indicators, and an AI assistant for surfacing urgent tasks.",
-    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Groq API"],
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "OpenAI API"],
     link: "https://my-saas-app-virid.vercel.app/",
   },
   {

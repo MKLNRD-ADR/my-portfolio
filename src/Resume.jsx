@@ -39,7 +39,7 @@ const projects = [
       "Added voice-to-text input for task creation, due-date scheduling with automatic color-coded urgency indicators, and a completion checkbox.",
       "Integrated an AI assistant that scans all sections and tasks to surface the one closest to its deadline, alongside filtering tools for managing large task lists.",
     ],
-    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Groq API"],
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "OpenAI API"],
   },
   {
     title: "Pocketra",
@@ -78,7 +78,7 @@ const techStack = [
   { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL", "Supabase", "Firebase"] },
   { label: "Mobile", items: ["Flutter", "Dart"] },
   { label: "Tools", items: ["Git", "GitHub", "Vercel", "VS Code"] },
-  { label: "APIs & Data", items: ["REST API Integration", "Groq API"] },
+  { label: "APIs & Data", items: ["REST API Integration", "OpenAI API"] },
   { label: "Familiar With (Coursework/School)", items: ["Java", "Django"] },
 ];
 
