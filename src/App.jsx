@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import aboutImage from "./assets/aboutme.png";
+import { Link } from "react-router-dom";
 
 // ─── TYPE SYSTEM ────────────────────────────────────────────────
 // Font: Plus Jakarta Sans (add to index.html ↓)
@@ -194,14 +195,12 @@ export default function App() {
           <div className="max-w-6xl mx-auto px-6 sm:px-10 flex justify-between items-center">
             {/* Label weight — same as navbar brand */}
             <span className={`${LABEL} text-[#555]`}>Mike Lenard V. Adriano</span>
-            <a
-              href="/resume"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/resume"
               className={`${LABEL} text-[#555] underline underline-offset-4 hover:text-[#e8e0d0] transition-colors`}
             >
               View Resume →
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -445,7 +444,7 @@ export default function App() {
                   ),
                   label: "Home",
                   line1: "124 Encanto, Angat, Bulacan",
-                  
+
                 },
               ].map(({ icon, label, line1, line2 }) => (
                 <div
