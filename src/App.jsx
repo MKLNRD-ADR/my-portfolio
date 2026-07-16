@@ -433,7 +433,7 @@ export default function App() {
                     </svg>
                   ),
                   label: "WhatsApp",
-                  line1: "080 045-7250",
+                  line1: "+63 993 710 3961",
                   line2: null,
                 },
                 {
