@@ -1,7 +1,55 @@
 import { useEffect, useState } from "react";
 import aboutImage from "./assets/aboutme.png";
+import cafeAboutus1 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page1.png";
+import cafeAboutus2 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page2.png";
+import cafeAboutus3 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page3.png";
+import cafeAboutus4 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page4.png";
+import cafeAdminProfile from "./assets/cafe-creme/Cafe_Creme_Admin_Profile.png";
+import cafeCart from "./assets/cafe-creme/Cafe_Creme_cart.png";
+import cafeCheckout from "./assets/cafe-creme/Cafe_Creme_Checkout.png";
+import cafeContactus1 from "./assets/cafe-creme/Cafe_Creme_Contactus_page1.png";
+import cafeCustomize from "./assets/cafe-creme/Cafe_Creme_Customize.png";
+import cafeDashboard from "./assets/cafe-creme/Cafe_Creme_dashboard.png";
+import cafeForgotpassword from "./assets/cafe-creme/Cafe_Creme_Forgotpassword.png";
+import cafeHome1 from "./assets/cafe-creme/Cafe_Creme_Home_page1.png";
+import cafeHome2 from "./assets/cafe-creme/Cafe_Creme_Home_page2.png";
+import cafeHome3 from "./assets/cafe-creme/Cafe_Creme_Home_page3.png";
+import cafeHome4 from "./assets/cafe-creme/Cafe_Creme_Home_page4.png";
+import cafeHome5 from "./assets/cafe-creme/Cafe_Creme_Home_page5.png";
+import cafeLogin from "./assets/cafe-creme/Cafe_Creme_Login.png";
+import cafeManageIngred from "./assets/cafe-creme/Cafe_Creme_Manage_ingred.png";
+import cafeManageProducts from "./assets/cafe-creme/Cafe_Creme_Manage_products.png";
+import cafeManageorder from "./assets/cafe-creme/Cafe_Creme_Manageorder.png";
+import cafeMenuFilter from "./assets/cafe-creme/Cafe_Creme_Menu_filter.png";
+import cafeMenu1 from "./assets/cafe-creme/Cafe_Creme_Menu_page1.png";
+import cafeMenu2 from "./assets/cafe-creme/Cafe_Creme_Menu_page2.png";
+import cafePaymentlist from "./assets/cafe-creme/Cafe_Creme_Paymentlist.png";
+import cafePosReceipt from "./assets/cafe-creme/Cafe_Creme_POS_receipt.png";
+import cafePos from "./assets/cafe-creme/Cafe_Creme_POS.png";
+import cafeQueue from "./assets/cafe-creme/Cafe_Creme_Queue.png";
+import cafeRegister from "./assets/cafe-creme/Cafe_Creme_Register.png";
+import cafeTheme1 from "./assets/cafe-creme/Cafe_Creme_Theme_page1.png";
+import cafeTheme2 from "./assets/cafe-creme/Cafe_Creme_Theme_page2.png";
+import cafeUpdateProduct from "./assets/cafe-creme/Cafe_Creme_update_product.png";
+import cafeUserList from "./assets/cafe-creme/Cafe_Creme_User_list.png";
+import cafeVerify1 from "./assets/cafe-creme/Cafe_Creme_Verify_page1.png";
+import cafeVerify2 from "./assets/cafe-creme/Cafe_Creme_Verify_page2.png";
+import cafeVerify3 from "./assets/cafe-creme/Cafe_Creme_Verify_page3.png";
+import cafeViewProduct from "./assets/cafe-creme/Cafe_Creme_View_product.png";
+import cafeViewOrder from "./assets/cafe-creme/Cafe_Creme_ViewOrder.png";
 import { Link } from "react-router-dom";
 
+// ─── TYPE SYSTEM ────────────────────────────────────────────────
+// Font: Plus Jakarta Sans (add to index.html ↓)
+//   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+//
+// Scale:
+//   Display  → font-[900] tracking-[-0.04em]   (Hero h1, section name h2)
+//   Heading  → font-[800] tracking-[-0.03em]   (card titles)
+//   Label    → font-[600] tracking-[0.12em] uppercase text-[11px]  (section labels, nav chips)
+//   Body     → font-[400] leading-[1.85]        (paragraphs)
+//   UI       → font-[500]                       (buttons, inputs, tags, nav links)
+// ────────────────────────────────────────────────────────────────
 
 const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
@@ -32,7 +80,7 @@ const technicalSkills = [
   },
   {
     category: "APIs & Data",
-    skills: ["REST API Integration", "LLM API Integration"],
+    skills: ["REST API Integration", "OpenAI API"],
   },
 ];
 
@@ -61,11 +109,43 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     link: "#",
     screenshots: [
-      "Customer Menu",
-      "Drink Customization",
-      "POS System",
-      "Inventory Management",
-      "Top-Selling Dashboard",
+      { src: cafeHome1, label: "Home – Page 1" },
+      { src: cafeHome2, label: "Home – Page 2" },
+      { src: cafeHome3, label: "Home – Page 3" },
+      { src: cafeHome4, label: "Home – Page 4" },
+      { src: cafeHome5, label: "Home – Page 5" },
+      { src: cafeAboutus1, label: "About Us – Page 1" },
+      { src: cafeAboutus2, label: "About Us – Page 2" },
+      { src: cafeAboutus3, label: "About Us – Page 3" },
+      { src: cafeAboutus4, label: "About Us – Page 4" },
+      { src: cafeMenu1, label: "Customer Menu" },
+      { src: cafeMenu2, label: "Menu – Page 2" },
+      { src: cafeContactus1, label: "Contact Us" },
+      { src: cafeLogin, label: "Login" },
+      { src: cafeForgotpassword, label: "Forgot Password" },
+      { src: cafeRegister, label: "Register" },
+      { src: cafeVerify1, label: "Verify – Page 1" },
+      { src: cafeVerify2, label: "Verify – Page 2" },
+      { src: cafeVerify3, label: "Verify – Page 3" },
+      { src: cafeMenuFilter, label: "Menu Filter" },
+      { src: cafeCustomize, label: "Drink Customization" },
+      { src: cafeViewProduct, label: "View Product" },
+      { src: cafeCart, label: "Cart" },
+      { src: cafeCheckout, label: "Checkout" },
+      { src: cafeViewOrder, label: "View Order" },
+      { src: cafeDashboard, label: "Top-Selling Dashboard" },
+      { src: cafeAdminProfile, label: "Admin Profile" },
+      { src: cafeUserList, label: "User List" },
+      { src: cafeTheme1, label: "Theme Settings – Page 1" },
+      { src: cafeTheme2, label: "Theme Settings – Page 2" },
+      { src: cafeManageProducts, label: "Manage Products" },
+      { src: cafeUpdateProduct, label: "Update Product" },
+      { src: cafePos, label: "POS System" },
+      { src: cafePosReceipt, label: "POS Receipt" },
+      { src: cafeQueue, label: "Order Queue" },
+      { src: cafeManageIngred, label: "Manage Ingredients" },
+      { src: cafePaymentlist, label: "Payment List" },
+      { src: cafeManageorder, label: "Manage Orders" },
     ],
   },
 ];
@@ -520,14 +600,18 @@ export default function App() {
             </button>
 
             {/* Slide */}
-            <div className="relative aspect-video w-full rounded-2xl border border-[#3c3933] bg-gradient-to-br from-[#232019] to-[#171717] flex flex-col items-center justify-center gap-3 overflow-hidden">
-              <svg viewBox="0 0 24 24" className="w-10 h-10 text-[#e8dfcf]/30" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 4.5h18M3 4.5c-.828 0-1.5.672-1.5 1.5v12c0 .828.672 1.5 1.5 1.5h18c.828 0 1.5-.672 1.5-1.5V6c0-.828-.672-1.5-1.5-1.5m-18 0h18" />
-              </svg>
-              <p className={`${LABEL} text-[#e8dfcf]/70`}>
-                {lightbox.project.screenshots[lightbox.index]}
-              </p>
-              <p className="text-[11px] text-[#666]">Screenshot coming soon</p>
+            <div className="relative aspect-video w-full rounded-2xl border border-[#3c3933] bg-[#171717] overflow-hidden">
+              <img
+                src={lightbox.project.screenshots[lightbox.index].src}
+                alt={lightbox.project.screenshots[lightbox.index].label}
+                className="w-full h-full object-cover"
+              />
+              {/* Caption overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-4">
+                <p className={`${LABEL} text-[#e8dfcf]`}>
+                  {lightbox.project.screenshots[lightbox.index].label}
+                </p>
+              </div>
 
               {/* Prev/Next arrows */}
               {lightbox.project.screenshots.length > 1 && (
@@ -566,18 +650,11 @@ export default function App() {
               )}
             </div>
 
-            {/* Dot indicators */}
-            <div className="flex justify-center gap-2 mt-5">
-              {lightbox.project.screenshots.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  aria-label={`Go to screenshot ${i + 1}`}
-                  onClick={() => setLightbox((prev) => ({ ...prev, index: i }))}
-                  className={`h-1.5 rounded-full transition-all ${i === lightbox.index ? "w-6 bg-[#e8dfcf]" : "w-1.5 bg-[#e8dfcf]/25 hover:bg-[#e8dfcf]/50"
-                    }`}
-                />
-              ))}
+            {/* Slide counter */}
+            <div className="flex items-center justify-center gap-4 mt-5">
+              <span className={`${LABEL} text-[#666]`}>
+                {lightbox.index + 1} / {lightbox.project.screenshots.length}
+              </span>
             </div>
           </div>
         </div>
