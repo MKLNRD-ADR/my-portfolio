@@ -23,7 +23,11 @@ const technicalSkills = [
   },
   {
     category: "Backend",
-    skills: ["PHP", "Node.js", "Next.js (API Routes)", "C#"],
+    skills: ["PHP", "Node.js", "Next.js (API Routes)", "Django"],
+  },
+  {
+    category: "Languages",
+    skills: ["C#", "Java", "Python", "C++"],
   },
   {
     category: "Database",
@@ -40,10 +44,6 @@ const technicalSkills = [
   {
     category: "APIs & Data",
     skills: ["REST API Integration", "OpenAI API"],
-  },
-  {
-    category: "Familiar With (Coursework/School)",
-    skills: ["Java", "Django"],
   },
 ];
 

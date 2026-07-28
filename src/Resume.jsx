@@ -74,12 +74,12 @@ const education = {
 
 const techStack = [
   { label: "Frontend", items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Bootstrap", "OpenCart (Twig)"] },
-  { label: "Backend", items: ["PHP", "Node.js", "Next.js (API Routes)"," C#"] },
+  { label: "Backend", items: ["PHP", "Node.js", "Next.js (API Routes)", "Django"] },
+  { label: "Languages", items: ["C#", "Java", "Python", "C++"] },
   { label: "Database", items: ["MySQL", "SQLite", "PostgreSQL", "Supabase", "Firebase"] },
   { label: "Mobile", items: ["Flutter", "Dart"] },
   { label: "Tools", items: ["Git", "GitHub", "Vercel", "VS Code"] },
   { label: "APIs & Data", items: ["REST API Integration", "OpenAI API"] },
-  { label: "Familiar With (Coursework/School)", items: ["Java", "Django"] },
 ];
 
 // ── Section wrapper ──────────────────────────────────────────────
