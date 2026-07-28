@@ -2,17 +2,6 @@ import { useEffect, useState } from "react";
 import aboutImage from "./assets/aboutme.png";
 import { Link } from "react-router-dom";
 
-// ─── TYPE SYSTEM ────────────────────────────────────────────────
-// Font: Plus Jakarta Sans (add to index.html ↓)
-//   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800;900&display=swap" rel="stylesheet">
-//
-// Scale:
-//   Display  → font-[900] tracking-[-0.04em]   (Hero h1, section name h2)
-//   Heading  → font-[800] tracking-[-0.03em]   (card titles)
-//   Label    → font-[600] tracking-[0.12em] uppercase text-[11px]  (section labels, nav chips)
-//   Body     → font-[400] leading-[1.85]        (paragraphs)
-//   UI       → font-[500]                       (buttons, inputs, tags, nav links)
-// ────────────────────────────────────────────────────────────────
 
 const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
@@ -43,7 +32,7 @@ const technicalSkills = [
   },
   {
     category: "APIs & Data",
-    skills: ["REST API Integration", "OpenAI API"],
+    skills: ["REST API Integration", "LLM API Integration"],
   },
 ];
 
@@ -71,6 +60,13 @@ const projects = [
     desc: "Built a full-featured ordering and management web app with customer and admin interfaces, online ordering, POS, inventory and product management, stock tracking, a top-selling-items dashboard, theming, and filtering.",
     tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     link: "#",
+    screenshots: [
+      "Customer Menu",
+      "Drink Customization",
+      "POS System",
+      "Inventory Management",
+      "Top-Selling Dashboard",
+    ],
   },
 ];
 
@@ -98,11 +94,33 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [lightbox, setLightbox] = useState(null); // { project, index }
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    document.body.style.overflow = isMenuOpen || lightbox ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, lightbox]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const handleKey = (e) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") {
+        setLightbox((prev) =>
+          prev ? { ...prev, index: (prev.index + 1) % prev.project.screenshots.length } : prev
+        );
+      }
+      if (e.key === "ArrowLeft") {
+        setLightbox((prev) =>
+          prev
+            ? { ...prev, index: (prev.index - 1 + prev.project.screenshots.length) % prev.project.screenshots.length }
+            : prev
+        );
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [lightbox]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -332,12 +350,22 @@ export default function App() {
                     ))}
                   </div>
                   {/* Link — UI weight */}
-                  <a
-                    href={p.link}
-                    className="mt-1 w-fit text-[13px] font-medium text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white"
-                  >
-                    View project →
-                  </a>
+                  {p.screenshots ? (
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ project: p, index: 0 })}
+                      className="mt-1 w-fit text-[13px] font-medium text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white"
+                    >
+                      View screenshots →
+                    </button>
+                  ) : (
+                    <a
+                      href={p.link}
+                      className="mt-1 w-fit text-[13px] font-medium text-[#e8dfcf] underline underline-offset-4 transition-colors hover:text-white"
+                    >
+                      View project →
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -468,6 +496,92 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* ── PROJECT SCREENSHOT LIGHTBOX ── */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 backdrop-blur-sm px-4"
+          onClick={() => setLightbox(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => setLightbox(null)}
+              className="absolute -top-12 right-0 p-2 text-[#e8e0d0]/70 hover:text-[#e8e0d0] transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+
+            {/* Slide */}
+            <div className="relative aspect-video w-full rounded-2xl border border-[#3c3933] bg-gradient-to-br from-[#232019] to-[#171717] flex flex-col items-center justify-center gap-3 overflow-hidden">
+              <svg viewBox="0 0 24 24" className="w-10 h-10 text-[#e8dfcf]/30" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 4.5h18M3 4.5c-.828 0-1.5.672-1.5 1.5v12c0 .828.672 1.5 1.5 1.5h18c.828 0 1.5-.672 1.5-1.5V6c0-.828-.672-1.5-1.5-1.5m-18 0h18" />
+              </svg>
+              <p className={`${LABEL} text-[#e8dfcf]/70`}>
+                {lightbox.project.screenshots[lightbox.index]}
+              </p>
+              <p className="text-[11px] text-[#666]">Screenshot coming soon</p>
+
+              {/* Prev/Next arrows */}
+              {lightbox.project.screenshots.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Previous screenshot"
+                    onClick={() =>
+                      setLightbox((prev) => ({
+                        ...prev,
+                        index: (prev.index - 1 + prev.project.screenshots.length) % prev.project.screenshots.length,
+                      }))
+                    }
+                    className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-black/40 text-[#e8e0d0] hover:bg-black/60 transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next screenshot"
+                    onClick={() =>
+                      setLightbox((prev) => ({
+                        ...prev,
+                        index: (prev.index + 1) % prev.project.screenshots.length,
+                      }))
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-black/40 text-[#e8e0d0] hover:bg-black/60 transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Dot indicators */}
+            <div className="flex justify-center gap-2 mt-5">
+              {lightbox.project.screenshots.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Go to screenshot ${i + 1}`}
+                  onClick={() => setLightbox((prev) => ({ ...prev, index: i }))}
+                  className={`h-1.5 rounded-full transition-all ${i === lightbox.index ? "w-6 bg-[#e8dfcf]" : "w-1.5 bg-[#e8dfcf]/25 hover:bg-[#e8dfcf]/50"
+                    }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── FOOTER ── */}
       <footer className="border-t border-white/10 py-6 text-center">
