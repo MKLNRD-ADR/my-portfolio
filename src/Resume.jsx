@@ -25,7 +25,7 @@ const projects = [
       "Built the web platform and admin panel for a disaster-response capstone combining a 3D mobile game with a companion website.",
       "Mobile component, built by teammates, modeled the BSU campus in Blender for a 3D fire and earthquake escape simulation.",
       "Implemented role-based accounts — Admin, Staff, and Student — each with tailored access to section and performance data.",
-      "Automated performance tracking for 200+ students and added data filtering platform-wide, improving evaluation efficiency by 100%.",
+      "Automated performance tracking for 200+ students, allowing evaluators to quickly view, filter, and organize results by student and section.",
     ],
     tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS", "Bootstrap"],
   },
