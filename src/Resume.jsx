@@ -5,7 +5,7 @@ const LABEL = "text-[11px] font-semibold tracking-[0.12em] uppercase";
 const workExperience = [
   {
     role: "Front-End Developer Intern",
-    company: "E-commerce Website Project",
+    company: "SMESoft Inc.",
     period: "Dec 2025 – Mar 2026",
     bullets: [
       "Developed and implemented responsive user interfaces for an e-commerce platform, ensuring consistent layout and functionality across desktop and mobile devices.",
