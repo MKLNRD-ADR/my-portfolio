@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import aboutImage from "./assets/aboutme.png";
 import cafeAboutus1 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page1.png";
 import cafeAboutus2 from "./assets/cafe-creme/Cafe_Creme_Aboutus_page2.png";
@@ -229,6 +229,7 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
   const [shots, setShots] = useState(0);
   const [thumb, setThumb] = useState(null);
   const [shutterDelay, setShutterDelay] = useState(0);
+  const pointerType = useRef("mouse"); // iOS Safari click events carry no pointerType, so record it on pointerdown
 
   const second = altSrc || src;
   const showSecond = hover || peek;
@@ -236,8 +237,7 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
   const takePhoto = (e) => {
     setThumb(showSecond ? second : src);
     setShots((n) => n + 1);
-    const type = e.nativeEvent && e.nativeEvent.pointerType;
-    if (type && type !== "mouse") {
+    if (pointerType.current !== "mouse") {
       // touch: swap the photo right away, let it be seen, then fire the shutter
       setShutterDelay(350);
       setPeek(true);
@@ -333,9 +333,10 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
                   type="button"
                   aria-label="Take photo"
                   onClick={takePhoto}
+                  onPointerDown={(e) => { pointerType.current = e.pointerType || "touch"; }}
                   onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
                   onPointerLeave={() => setHover(false)}
-                  onFocus={() => setHover(true)}
+                  onFocus={(e) => { if (e.currentTarget.matches(":focus-visible")) setHover(true); }}
                   onBlur={() => setHover(false)}
                   className="group flex h-[66px] w-[66px] items-center justify-center rounded-full border-[3px] border-[color:var(--fg)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--fg)]"
                 >
