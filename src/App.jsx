@@ -1090,8 +1090,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Floating chatbot (bottom-right), hidden while the mobile menu is open so it can't cover the drawer */}
-      {!isMenuOpen && <ChatBot />}
+      {/* Floating chatbot (bottom-right). Always rendered, so it floats over the mobile sidebar too */}
+      <ChatBot />
     </div>
   );
 }
