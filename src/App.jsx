@@ -216,7 +216,10 @@ const SectionMark = ({ index, title }) => (
 );
 
 // Film-grain look for the phone photo (no sepia, so no brown tint)
-const VINTAGE_FILTER = { filter: "contrast(1.1) saturate(0.8) brightness(1.08) url(#film-grain)" };
+// The grain is a static tiled image (rasterised once), NOT a live SVG filter: live feTurbulence
+// filters are re-computed on every frame in iOS Safari and cause heavy lag.
+const VINTAGE_FILTER = { filter: "contrast(1.1) saturate(0.8) brightness(1.08)" };
+const GRAIN_BG = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")`;
 
 // Phone portrait: a camera app on a phone that is white in light mode and dark in dark mode.
 // Hover the shutter to swap the photo; click it to "take" a picture.
@@ -225,6 +228,7 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
   const [peek, setPeek] = useState(false); // touch devices: brief swap after a tap
   const [shots, setShots] = useState(0);
   const [thumb, setThumb] = useState(null);
+  const [shutterDelay, setShutterDelay] = useState(0);
 
   const second = altSrc || src;
   const showSecond = hover || peek;
@@ -234,8 +238,12 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
     setShots((n) => n + 1);
     const type = e.nativeEvent && e.nativeEvent.pointerType;
     if (type && type !== "mouse") {
+      // touch: swap the photo right away, let it be seen, then fire the shutter
+      setShutterDelay(350);
       setPeek(true);
-      setTimeout(() => setPeek(false), 1400);
+      setTimeout(() => setPeek(false), 1600);
+    } else {
+      setShutterDelay(0);
     }
   };
 
@@ -243,15 +251,6 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
 
   return (
     <div className="mx-auto w-[270px]">
-      {/* film grain applied to the photo only, so the screen background stays pure white / black */}
-      <svg width="0" height="0" className="absolute" aria-hidden="true" focusable="false">
-        <filter id="film-grain" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise" />
-          <feColorMatrix in="noise" type="matrix" values="0.2 0.2 0.2 0 0.65  0.2 0.2 0.2 0 0.65  0.2 0.2 0.2 0 0.65  0 0 0 0 1" result="gray" />
-          <feBlend in="SourceGraphic" in2="gray" mode="multiply" result="grained" />
-          <feComposite in="grained" in2="SourceAlpha" operator="in" />
-        </filter>
-      </svg>
       <div className="relative">
         {/* side buttons */}
         <span className={`${edge} -left-[3px] top-24 h-8 rounded-l`} />
@@ -273,7 +272,7 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
               src={src}
               alt=""
               style={VINTAGE_FILTER}
-              className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ${
+              className={`absolute inset-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-300 will-change-[opacity,transform] ${
                 showSecond ? "scale-105 opacity-0" : "scale-100 opacity-100"
               }`}
             />
@@ -281,9 +280,15 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
               src={second}
               alt=""
               style={VINTAGE_FILTER}
-              className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ${
+              className={`absolute inset-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-300 will-change-[opacity,transform] ${
                 showSecond ? "scale-100 opacity-100" : "scale-105 opacity-0"
               }`}
+            />
+
+            {/* static film grain */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.16]"
+              style={{ backgroundImage: GRAIN_BG, backgroundSize: "160px 160px" }}
             />
 
             {/* rule-of-thirds grid */}
@@ -348,9 +353,9 @@ const PhoneCamera = ({ src, altSrc, alt }) => {
             {/* shutter animation: blades close, then a white flash */}
             {shots > 0 && (
               <div key={shots} className="pointer-events-none absolute inset-0 z-30">
-                <span className="shot-top absolute inset-x-0 top-0 h-1/2 bg-black" />
-                <span className="shot-bottom absolute inset-x-0 bottom-0 h-1/2 bg-black" />
-                <span className="shot-flash absolute inset-0 bg-white" />
+                <span style={{ animationDelay: `${shutterDelay}ms` }} className="shot-top absolute inset-x-0 top-0 h-1/2 bg-black" />
+                <span style={{ animationDelay: `${shutterDelay}ms` }} className="shot-bottom absolute inset-x-0 bottom-0 h-1/2 bg-black" />
+                <span style={{ animationDelay: `${shutterDelay}ms` }} className="shot-flash absolute inset-0 bg-white" />
               </div>
             )}
           </div>
@@ -598,9 +603,9 @@ export default function App() {
         @keyframes shot-flash { 0%, 30% { opacity: 0; } 40% { opacity: 0.95; } 100% { opacity: 0; } }
         @keyframes thumb-pop { 0% { transform: scale(1.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes focus-in { 0% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; } 60% { opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
-        .shot-top { animation: shot-top 480ms ease-out forwards; }
-        .shot-bottom { animation: shot-bottom 480ms ease-out forwards; }
-        .shot-flash { animation: shot-flash 480ms ease-out forwards; }
+        .shot-top { animation: shot-top 480ms ease-out both; }
+        .shot-bottom { animation: shot-bottom 480ms ease-out both; }
+        .shot-flash { animation: shot-flash 480ms ease-out both; }
         .thumb-pop { animation: thumb-pop 400ms 250ms ease-out both; }
         .focus-in { animation: focus-in 300ms ease-out both; }
         @media (prefers-reduced-motion: reduce) {
@@ -708,8 +713,9 @@ export default function App() {
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
+      {/* h-[100dvh] = visible viewport height on mobile; toggle sits right under the links so it's never cut off */}
       <aside
-        className={`fixed right-0 top-0 z-[60] flex h-screen w-72 flex-col justify-between border-l border-[color:var(--line)] bg-[var(--bg)] px-6 pb-8 pt-20 transition-transform duration-300 lg:hidden ${
+        className={`fixed right-0 top-0 z-[60] flex h-[100dvh] w-72 flex-col gap-8 overflow-y-auto border-l border-[color:var(--line)] bg-[var(--bg)] px-6 pb-24 pt-20 transition-transform duration-300 lg:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -729,7 +735,11 @@ export default function App() {
             </li>
           ))}
         </ul>
-        <ThemeToggle theme={theme} setTheme={setTheme} />
+
+        <div className="border-t border-[color:var(--line)] pt-6">
+          <p className={`${LABEL} mb-3 text-[9px] text-[color:var(--faint)]`}>Theme</p>
+          <ThemeToggle theme={theme} setTheme={setTheme} />
+        </div>
       </aside>
 
       <main className="lg:pl-[220px]">
@@ -1080,8 +1090,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Floating chatbot (bottom-right) */}
-      <ChatBot />
+      {/* Floating chatbot (bottom-right), hidden while the mobile menu is open so it can't cover the drawer */}
+      {!isMenuOpen && <ChatBot />}
     </div>
   );
 }
