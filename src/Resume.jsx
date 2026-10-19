@@ -1,4 +1,35 @@
+import { useEffect, useState } from "react";
+
 const PDF_PATH = "/Mike_Lenard_Adriano_Resume.pdf";
+
+const RESUME_THEMES = {
+  light: {
+    "--resume-bg": "#ffffff",
+    "--resume-paper": "#ffffff",
+    "--resume-fg": "#222222",
+    "--resume-muted": "#555555",
+    "--resume-line": "#d4d4d8",
+    "--resume-accent": "#1F3864",
+    "--resume-button": "#0d0d0d",
+    "--resume-button-hover": "#2a2a2a",
+    "--resume-button-text": "#ffffff",
+    "--resume-soft": "#f5f5f5",
+    "--resume-shadow": "0 4px 24px rgba(0,0,0,0.12)",
+  },
+  dark: {
+    "--resume-bg": "#0b0b0b",
+    "--resume-paper": "#151515",
+    "--resume-fg": "#f1f1f1",
+    "--resume-muted": "#a3a3a3",
+    "--resume-line": "#363636",
+    "--resume-accent": "#9ebbea",
+    "--resume-button": "#f1f1f1",
+    "--resume-button-hover": "#d6d6d6",
+    "--resume-button-text": "#0d0d0d",
+    "--resume-soft": "#242424",
+    "--resume-shadow": "0 4px 24px rgba(0,0,0,0.55)",
+  },
+};
 
 const summary =
   "BSIT graduate (Web and Mobile Application Development) and full-stack developer who built the award-winning capstone platform that tracks performance for 200+ students. Experienced in databases, admin dashboards, role-based accounts, and record-tracking systems, with a strong documentation habit from internship and team projects. Quick to learn new tools and processes, and comfortable working with non-technical stakeholders in both development and IT support roles.";
@@ -86,11 +117,11 @@ const education = {
 
 const MONO = "'Space Mono', 'JetBrains Mono', ui-monospace, monospace";
 
-// ── Section heading (navy, bold, with rule) ─────────────────────
+// ── Section heading (bold, with rule) ────────────────────────────
 function Section({ title, children }) {
   return (
     <section className="mt-5">
-      <h2 className="text-[15px] font-bold uppercase tracking-wide text-[#1F3864] border-b-2 border-[#1F3864] pb-[2px] mb-2">
+      <h2 className="mb-2 border-b-2 border-[color:var(--resume-accent)] pb-[2px] text-[15px] font-bold uppercase tracking-wide text-[color:var(--resume-accent)]">
         {title}
       </h2>
       {children}
@@ -101,7 +132,7 @@ function Section({ title, children }) {
 // ── Bullet list ─────────────────────────────────────────────────
 function Bullets({ items }) {
   return (
-    <ul className="list-disc ml-6 sm:ml-7 text-[13.5px] leading-[1.5] text-[#222] marker:text-[#222]">
+    <ul className="ml-6 list-disc text-[13.5px] leading-[1.5] text-[color:var(--resume-fg)] marker:text-[color:var(--resume-fg)] sm:ml-7">
       {items.map((b, i) => (
         <li key={i} className="pl-1">
           {b}
@@ -115,24 +146,56 @@ function Bullets({ items }) {
 function EntryHeader({ title, period }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <h3 className="text-[14.5px] font-bold text-[#222] leading-snug">{title}</h3>
-      <span className="text-[13px] text-[#555] whitespace-nowrap">{period}</span>
+      <h3 className="text-[14.5px] font-bold leading-snug text-[color:var(--resume-fg)]">{title}</h3>
+      <span className="whitespace-nowrap text-[13px] text-[color:var(--resume-muted)]">{period}</span>
     </div>
   );
 }
 
 export default function Resume() {
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem("theme") || "system";
+    } catch {
+      return "system";
+    }
+  });
+  const [systemDark, setSystemDark] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateSystemTheme = () => setSystemDark(mediaQuery.matches);
+    updateSystemTheme();
+    mediaQuery.addEventListener("change", updateSystemTheme);
+    return () => mediaQuery.removeEventListener("change", updateSystemTheme);
+  }, []);
+
+  useEffect(() => {
+    const syncTheme = () => {
+      try {
+        setTheme(localStorage.getItem("theme") || "system");
+      } catch {
+        setTheme("system");
+      }
+    };
+    window.addEventListener("storage", syncTheme);
+    return () => window.removeEventListener("storage", syncTheme);
+  }, []);
+
+  const isDark = theme === "dark" || (theme === "system" && systemDark);
+  const palette = isDark ? RESUME_THEMES.dark : RESUME_THEMES.light;
+
   return (
     <div
-      className="min-h-screen bg-[#FFFFFF] py-6 sm:py-10 px-3 sm:px-6"
-      style={{ fontFamily: "'Times New Roman', Times, serif" }}
+      className="min-h-screen bg-[var(--resume-bg)] px-3 py-6 text-[color:var(--resume-fg)] transition-colors duration-300 sm:px-6 sm:py-10"
+      style={{ ...palette, fontFamily: "'Times New Roman', Times, serif" }}
     >
       <div className="max-w-[850px] mx-auto">
         {/* ── TOP BAR ── */}
         <div className="flex items-center justify-between mb-4">
           <a
             href="/"
-            className="inline-flex items-center gap-2 bg-white text-[#0d0d0d] border border-[#e4e4e7] rounded-lg px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-[#f5f5f5] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg border border-[color:var(--resume-line)] bg-[var(--resume-paper)] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[color:var(--resume-fg)] transition-colors hover:bg-[var(--resume-soft)]"
             style={{ fontFamily: MONO }}
           >
             <span aria-hidden="true">←</span> Portfolio
@@ -141,7 +204,7 @@ export default function Resume() {
           <a
             href={PDF_PATH}
             download="Mike_Lenard_Adriano_Resume.pdf"
-            className="inline-flex items-center gap-2 bg-[#0d0d0d] text-white rounded-lg px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-[#2a2a2a] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[var(--resume-button)] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[color:var(--resume-button-text)] transition-colors hover:bg-[var(--resume-button-hover)]"
             style={{ fontFamily: MONO }}
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
@@ -156,25 +219,25 @@ export default function Resume() {
         </div>
 
         {/* ── PAPER ── */}
-        <div className="bg-white border border-[#d4d4d8] shadow-[0_4px_24px_rgba(0,0,0,0.12)] px-5 sm:px-12 py-8 sm:py-10 text-[#222]">
+        <div className="border border-[color:var(--resume-line)] bg-[var(--resume-paper)] px-5 py-8 text-[color:var(--resume-fg)] shadow-[var(--resume-shadow)] sm:px-12 sm:py-10">
           {/* Header */}
           <header>
-            <h1 className="text-[28px] sm:text-[34px] font-bold uppercase leading-tight text-[#222]">
+            <h1 className="text-[28px] font-bold uppercase leading-tight text-[color:var(--resume-fg)] sm:text-[34px]">
               Mike Lenard V. Adriano
             </h1>
-            <p className="text-[15px] font-bold text-[#1F3864] mt-0.5">
+            <p className="mt-0.5 text-[15px] font-bold text-[color:var(--resume-accent)]">
               IT Support Staff | Full-Stack Developer
             </p>
-            <p className="text-[12.5px] text-[#555] mt-1.5">
+            <p className="mt-1.5 text-[12.5px] text-[color:var(--resume-muted)]">
               mikelenard2004@gmail.com &nbsp;|&nbsp; +63 993 710 3961 &nbsp;|&nbsp; Angat, Bulacan, Philippines
             </p>
-            <p className="text-[12.5px] text-[#555] mt-1">
+            <p className="mt-1 text-[12.5px] text-[color:var(--resume-muted)]">
               Portfolio:{" "}
               <a
                 href="https://my-portfolio-mike-dev1.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#1F3864] underline"
+                className="text-[color:var(--resume-accent)] underline"
               >
                 my-portfolio-mike-dev1.vercel.app
               </a>
@@ -183,7 +246,7 @@ export default function Resume() {
 
           {/* Professional Summary */}
           <Section title="Professional Summary">
-            <p className="text-[13.5px] leading-[1.5] text-[#222]">{summary}</p>
+            <p className="text-[13.5px] leading-[1.5] text-[color:var(--resume-fg)]">{summary}</p>
           </Section>
 
           {/* Technical Skills */}
@@ -209,7 +272,7 @@ export default function Resume() {
               {projects.map((p) => (
                 <div key={p.title}>
                   <EntryHeader title={p.title} period={p.period} />
-                  <p className="text-[12.5px] italic text-[#555] mb-0.5">{p.tech}</p>
+                  <p className="mb-0.5 text-[12.5px] italic text-[color:var(--resume-muted)]">{p.tech}</p>
                   <Bullets items={p.bullets} />
                 </div>
               ))}
