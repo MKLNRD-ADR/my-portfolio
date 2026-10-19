@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 const MONO = { fontFamily: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" };
 
-const QUICK_REPLIES = ["Projects", "Skills", "Contact", "Resume", "Availability"];
+const QUICK_REPLIES = ["Projects", "Skills", "Contact", "Resume", "Availability", "Relocation"];
 
 const KB = [
   {
@@ -58,10 +58,16 @@ const KB = [
     keys: ["resume", "cv"],
     reply: "You can view Mike's resume with the “View resume” button in the hero section, or go straight to /resume.",
   },
+  // Keep this above the availability entry so "open to relocate" matches here first.
+  {
+    keys: ["relocat", "relocation", "move", "moving", "abroad", "overseas", "onsite", "willing", "remote"],
+    reply:
+      "Yes, Mike is willing to relocate, whether elsewhere in the Philippines or abroad. He's also open to remote and on-site roles. The quickest way to discuss details is mikelenard2004@gmail.com.",
+  },
   {
     keys: ["available", "availability", "open", "opportunity", "job", "intern", "internship", "hiring"],
     reply:
-      "Yes, Mike is open to opportunities. The quickest way to reach him is mikelenard2004@gmail.com.",
+      "Yes, Mike is open to opportunities, including internships and entry-level roles, and he's willing to relocate. The quickest way to reach him is mikelenard2004@gmail.com.",
   },
   {
     keys: ["where", "location", "live", "based", "bulacan", "angat", "manila", "philippines"],
@@ -206,22 +212,22 @@ export default function ChatBot() {
                 </span>
               </div>
             )}
-
-            {messages.length === 1 && !typing && (
-              <div className="flex flex-wrap gap-2 pt-1">
-                {QUICK_REPLIES.map((q) => (
-                  <button
-                    key={q}
-                    type="button"
-                    onClick={() => send(q)}
-                    className="rounded-full border border-[color:var(--line)] bg-[var(--chip)] px-3 py-1.5 text-[12px] text-[color:var(--mute)] transition-colors hover:border-[color:var(--fg)] hover:text-[color:var(--fg)]"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            )}
             <div ref={endRef} />
+          </div>
+
+          {/* quick replies (always visible) */}
+          <div className="flex gap-2 overflow-x-auto border-t border-[color:var(--line)] px-3 py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {QUICK_REPLIES.map((q) => (
+              <button
+                key={q}
+                type="button"
+                disabled={typing}
+                onClick={() => send(q)}
+                className="shrink-0 rounded-full border border-[color:var(--line)] bg-[var(--chip)] px-3 py-1.5 text-[12px] text-[color:var(--mute)] transition-colors hover:border-[color:var(--fg)] hover:text-[color:var(--fg)] disabled:opacity-40"
+              >
+                {q}
+              </button>
+            ))}
           </div>
 
           {/* input */}
