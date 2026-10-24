@@ -58,7 +58,7 @@ const technicalSkills = [
   },
   {
     category: "Databases",
-    skills: ["MySQL", "PostgreSQL", "Supabase", "Firebase", "SQLite", "CRUD Operations", "Record Management"],
+    skills: ["MySQL", "PostgreSQL", "Supabase", "Firebase", "SQLite", "Microsoft SQL Server","CRUD Operations", "Record Management"],
   },
   {
     category: "Tools & APIs",

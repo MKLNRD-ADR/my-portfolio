@@ -37,7 +37,7 @@ const summary =
 const skills = [
   "Languages: JavaScript, TypeScript, PHP, Java, HTML, CSS, Dart, Python, C#, C++",
   "Frameworks & Libraries: React, Next.js, Node.js, Flutter, Tailwind CSS, Bootstrap, OpenCart (Twig), Django",
-  "Databases: MySQL, PostgreSQL, Supabase, Firebase, SQLite | CRUD Operations, Record Management",
+  "Databases: MySQL, PostgreSQL, Supabase, Firebase, SQLite, Microsoft SQL Server | CRUD Operations, Record Management",
   "Office & Documentation: Microsoft Word, Microsoft Excel, Data Entry, Report Preparation, Record Keeping",
   "Tools: Git, GitHub, Vercel, VS Code | REST API Integration, OpenAI API",
   "Hardware & IT Support: PC/printer setup and troubleshooting, basic OS and network configuration, software installation/maintenance",
